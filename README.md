@@ -1,18 +1,45 @@
-# README for a newly created project.
+# What is the difference between a Procs, blocks, and lambdas?
 
-There are a couple of things you should do first, before you can use all of Git's power:
+This is my talk to the Feb 2012 YEGrb meetup where I answer the question, "What is the difference between a Proc, block and lambda?"
 
-  * Add a remote to this project: in the Cloud9 IDE command line, you can execute the following commands
-    `git remote add [remote name] [remote url (eg. 'git@github.com:/ajaxorg/node_chat')]` [Enter]
-  * Create new files inside your project
-  * Add them to to Git by executing the following command
-    `git add [file1, file2, file3, ...]` [Enter]
-  * Create a commit which can be pushed to the remote you just added
-    `git commit -m 'added new files'` [Enter]
-  * Push the commit the remote
-    `git push [remote name] master` [Enter]
+## Notes
 
-That's it! If this doesn't work for you, please visit the excellent resources from [Github.com](http://help.github.com) and the [Pro Git](http://http://progit.org/book/) book.
-If you can't find your answers there, feel free to ask us via Twitter (@cloud9ide), [mailing list](groups.google.com/group/cloud9-ide) or IRC (#cloud9ide on freenode).
+ * "What are Procs, blocks and lambdas?"
+ * Refine question
+   - limiting to Ruby 1.9.2
+ * They're all ways to capture and re-use a unit of code
+ * Define the syntax for each
+   * blocks
+     * created using do..end or { ... }
+     * invoked using yield
+     * not an argument
+     * it's syntax
+   * Proc
+     * created using Proc.new or proc
+     * invoked using Proc#call
+   * lambda
+     * created using lambda or ->(a,b) (stabby)
+     * invoked using #call
+ * Talk about what is the same
+   * they all create a closure
+     - capture the variables that were defined at the time the block, proc or lambda was defined
+ * Talk about what is different
+   - procs and lambdas are objects, but a block is syntax
+   - procs and lambdas are invoked with call, but a block is invoked with yield
+   - proc and lambda differ in how control statements are handled
+     * return values from lambda
+     * don't call return from Proc, only works inside defining closure
+   - proc and lambda differ in how arguments are handled
+     * procs accept missing values, lambda's are stricter
+ * When do I use them
+   - when doing functional programming
+     - your code becomes part of your application
+   - when you re-use the same "wrapper" around different guts
+   - to replace almost everything else in Ruby
+   - other examples?
 
-Happy coding!
+## Resources
+
+ * http://www.youtube.com/watch?v=VBC-G6hahWA
+ * http://experthuman.com/programming-with-nothing
+ * http://techspry.com/ruby_and_rails/proc-and-lambda-in-ruby/
